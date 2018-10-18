@@ -18,7 +18,7 @@ prettyNode("uber_ios") { //Node name (uios, uber_ios, mustang)
 		fastlane 'fastlane perform_tests key:PF_Staging_D'
 		archiveAppForTesting 'build/Build/Products/Debug-iphonesimulator/'
 	}
-	reportStage { //run your report code it will automatically archives all reprots
+	reportStage { //run your report code it will automatically archives all reports
 		sh 'fastlane run_reports' //you can also use slack.qsh if you want the error to go to slack (fastlane does this)
 	}
 }

@@ -1,0 +1,9 @@
+slack.slackChannel = "jenkins_notifications"
+prettyNode(nodeName) {
+	gradleClean()
+	androidBuildScriptInject()
+	gradleDependencies()
+	gradleAssemble("Shake Shack")
+	gradleTest()
+	gradleReports()
+}
