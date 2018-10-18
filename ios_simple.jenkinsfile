@@ -1,0 +1,2 @@
+slack.slackChannel = "jenkins_notifications"
+iosBuild("PD_F", "Shake Shack")
