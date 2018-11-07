@@ -1,7 +1,7 @@
 slack.slackChannel = "jenkins_notifications"
 prettyNode("uber_android") {
-	gradleSetup()
-	gradleAssemble("Shake Shack")
-	gradleTest()
-	gradleReports()
+	gradlew.setup()
+	gradlew.assembleStage("Shake Shack")
+	gradlew.testStage()
+	gradlew.generateReportsStage()
 }

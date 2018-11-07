@@ -1,2 +1,2 @@
 slack.slackChannel = "jenkins_notifications"
-androidBuild("Shake Shack")
+androidBuild name:"Shake Shack"
