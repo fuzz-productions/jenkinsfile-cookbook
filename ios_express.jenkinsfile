@@ -1,7 +1,7 @@
 slack.slackChannel = "jenkins_notifications"
 prettyNode("uber_ios") {
-	fastlaneSetup()
-	fastlaneBuild("PF_D", "Shake Shack")
-	fastlaneTest("PF_Staging_D")
-	fastlaneReport()
+	fastlane.setup()
+	fastlane.deployStage keys: "PF_D", name: "Shake Shack"
+	fastlane.performTestStage "PF_Staging_D"
+	fastlane.run_reports()
 }
