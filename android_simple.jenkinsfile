@@ -1,0 +1,2 @@
+slack.slackChannel = "SLACK_CHANNEL_NAME"
+androidBuild name:"PROJECT NAME"

@@ -1,0 +1,9 @@
+slack.slackChannel = "SLACK_CHANNEL_NAME"
+prettyNode(nodeName) {
+	gradlew.cleanStage()
+	androidBuildScriptInject()
+	gradlew.dependenciesStage()
+	gradlew.assembleStage("PROJECT NAME")
+	gradlew.testStage()
+	gradlew.generateReportsStage()
+}

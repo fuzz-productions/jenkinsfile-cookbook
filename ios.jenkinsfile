@@ -1,0 +1,24 @@
+slack.slackChannel = "SLACK_CHANNEL_NAME" //Slack channel name
+//You can also pass in false into prettyNode but this forces you to control the checkout process
+prettyNode("NODE_NAME") { //Node name (uios, uber_ios, or machine name) 
+	stage("Clean") { //Delete the xcode working directory of previous builds
+		fastlane.clean() 
+	}
+	stage("Provision") { //Download the certs
+		fastlane.install_certs()
+	}		
+	stage("Dependencies") { //run cocoapods, submodule, carthage etc
+		fastlane.install_dependencies()
+	}
+	//The name added here is the pretty name for fuzzwares push notifications (it is optional)
+	mobileBuildStage('Project Name') { //run your builds it will automatically archive and notify fuzzwares and slack
+		fastlane.deploy_jenkins 'FAZU_KEY'
+	}
+	testStage { //run your test code it will automatically archive code coverage and unit test (includes slack integration)
+		fastlane.perform_tests 'FAZU_KEY'
+		archiveAppForTesting 'build/Build/Products/Debug-iphonesimulator/'
+	}
+	reportStage { //run your report code it will automatically archives all reports
+		fastlane.run_reports() //you can also use slack.qsh if you want the error to go to slack (fastlane does this)
+	}
+}

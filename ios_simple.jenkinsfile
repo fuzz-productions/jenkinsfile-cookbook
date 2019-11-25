@@ -1,0 +1,2 @@
+slack.slackChannel = "SLACK_CHANNEL_NAME"
+iosBuild keys: "FAZU_KEY", name: "PROJECT_NAME"

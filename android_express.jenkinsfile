@@ -1,0 +1,7 @@
+slack.slackChannel = "SLACK_CHANNEL_NAME"
+prettyNode("uber_android") {
+	gradlew.setup()
+	gradlew.assembleStage("PROJECT NAME")
+	gradlew.testStage()
+	gradlew.generateReportsStage()
+}

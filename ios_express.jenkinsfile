@@ -1,0 +1,7 @@
+slack.slackChannel = "SLACK_CHANNEL_NAME"
+prettyNode("uber_ios") {
+	fastlane.setup()
+	fastlane.deployStage keys: "FAZU_KEY", name: "PROJECT NAME"
+	fastlane.performTestStage "FAZU_KEY"
+	fastlane.run_reports()
+}

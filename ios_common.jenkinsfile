@@ -1,0 +1,14 @@
+slack.slackChannel = "SLACK_CHANNEL_NAME"
+prettyNode("uber_ios") {
+	fastlane.clean()
+	fastlane.install_certs()
+	fastlane.install_dependencies()
+	mobileBuildStage("PROJECT NAME") {
+		fastlane.deploy_jenkins 'FAZU_KEY'
+	}
+	testStage {
+		fastlane.perform_tests 'FAZU_KEY'
+		archiveAppForTesting 'build/Build/Products/Debug-iphonesimulator/'
+	}
+	fastlane.run_reports()
+}

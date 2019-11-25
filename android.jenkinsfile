@@ -1,0 +1,27 @@
+slack.slackChannel = "SLACK_CHANNEL_NAME"  //Slack channel name
+//You can also pass in false into prettyNode but this forces you to control the checkout process
+prettyNode("uber_android") {  //Node name (uios, uber_ios, mustang) 
+	stage("Clean") { //Stop gradle and clean the project
+	    gradlew.stop()
+	    gradlew.clean()
+	}
+	//add the shared quality scripts and build scripts
+	//androidBuildScriptInject abstracts this away while allowing you to override the `qualityFile` and `buildscript`
+	sh "curl -O 'https://jenkins.fuzzhq.com/userContent/jenkins-scripts/android/${qualityFile}'"
+    sh "printf "\n" >> app/build.gradle"
+    sh "echo \"apply from: '../${qualityFile}'\" >> app/build.gradle"
+    sh "curl https://jenkins.fuzzhq.com/userContent/jenkins-scripts/android/${buildscript} >> build.gradle"
+	stage("Dependencies") {
+		gradlew.dependencies()
+	}
+	//The name added here is the pretty name for fuzzwares push notifications (it is optional)
+	mobileBuildStage('PROJECT NAME') { //run your builds it will automatically archive and notify fuzzwares and slack
+		gradlew.assemble()
+	}
+	testStage { //run your test code it will automatically archive code coverage and unit test (includes slack integration)
+		gradlew.test()
+	}
+	reportStage { //run your report code it will automatically archives all reports
+		gradlew.generateReports() //you can also use slack.qsh if you want the error to go to slack (gradlew does this)
+	}
+}
